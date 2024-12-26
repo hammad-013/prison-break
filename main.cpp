@@ -16,18 +16,18 @@ using namespace std;
     SetConsoleCursorPosition(hOuput, scrn);
 }*/
 
-void printPrison(int row, int col, int ar[][88])
+void printPrison(int row, int col, int ar[][50])
 {
     cout << "     ";
     for (int k = 0; k < col; k++)
     {
         if (k < 10)
         {
-            cout << k << "   ";
+            cout << k + 1 << "   ";
         }
         else
         {
-            cout << k << "  ";
+            cout << k + 1 << "  ";
         }
     }
     cout << endl;
@@ -46,13 +46,13 @@ void printPrison(int row, int col, int ar[][88])
     cout << endl;
     for (int i = 0; i < row; i++)
     {
-        if (i < 10)
+        if (i < 9)
         {
-            cout << i << " ";
+            cout << i + 1 << " ";
         }
         else
         {
-            cout << i;
+            cout << i + 1;
         }
 
         cout << (char)219 << (char)219;
@@ -61,7 +61,7 @@ void printPrison(int row, int col, int ar[][88])
             // if(ar[i][j]==0)
             cout << " " << ar[i][j] << " |";
             // else
-            //  cout<<"  ";
+            //  cout<<"    ";
         }
         if (i != 5)
         {
@@ -87,7 +87,7 @@ void printPrison(int row, int col, int ar[][88])
     // cout<<endl<<"\t\t\t\t\t\t\t\t\tFree Run!";
     cout << endl;
 }
-void playerMovement(int row, int col, int srow, int scol, int erow, int ecol, int toSwapi, int arr[][88])
+void playerMovement(int row, int col, int srow, int scol, int erow, int ecol, int arr[][50])
 {
     while (true)
     {
@@ -97,6 +97,8 @@ void playerMovement(int row, int col, int srow, int scol, int erow, int ecol, in
         cin >> toRow;
         cout << "enter column no.: ";
         cin >> toCol;
+        toRow -= 1;
+        toCol -= 1;
         int temp = arr[toRow][toCol];
         if (toRow != row && toCol != col)
         {
@@ -126,7 +128,16 @@ void playerMovement(int row, int col, int srow, int scol, int erow, int ecol, in
                 }
             }
         }
+        if (srow == erow && scol == ecol)
+        {
 
+            system("CLS");
+            cout << "Bhaaaaaaaaaaaaaaaaaaaaaggggggggg!!!!" << endl
+                 << endl;
+            cout << "You have escaped the prison." << endl
+                 << endl;
+            break;
+        }
         // movement with arrow keys
         /* int movement = getch();
          //up
@@ -200,20 +211,13 @@ void playerMovement(int row, int col, int srow, int scol, int erow, int ecol, in
              else{
                  cout<<"\a\a\a";
              }
-         }
-         if (srow == erow && scol == ecol)
-         {
-
-             system("CLS");
-             cout << "You have escaped the prison.";
-             break;
          }*/
     }
 }
 int main()
 {
     int row = 40, col = 50;
-    int arr[row][88] = {
+     int arr[row][50] = {
         {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,  },
         {1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0,  },
         {1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 0, 1,  },
@@ -256,11 +260,10 @@ int main()
         {1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,  }
         };
 
-    int srow = 39, scol = 1, erow = 5, ecol = 87;
+    int srow = 39, scol = 1, erow = 5, ecol = 49;
     printPrison(row, col, arr);
-    int toSwap = 0;
 
-    playerMovement(row, col, srow, scol, erow, ecol, toSwap, arr);
+    playerMovement(row, col, srow, scol, erow, ecol, arr);
 
     return 0;
 }
